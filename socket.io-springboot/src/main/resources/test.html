@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Socket.IO Example</title>
+</head>
+<body>
+<h1>Socket.IO Example</h1>
+<div id="message-container">
+    <!-- Messages will be displayed here -->
+</div>
+<form id="message-form">
+    <input type="text" id="message-input" placeholder="Type a message..."/>
+    <button type="submit">Send</button>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+
+    // Create a query string with the token parameter
+    const queryString = `subject=test`;
+
+    // Connect to the Socket.IO server
+    const socket = io("ws://127.0.0.1:" + 8080, {
+        autoConnect: false,
+        query: queryString,
+        path: "/chat/ws",
+    }); // Replace with your server URL
+
+    socket.on('connect', function () {
+        console.log("connect success!")
+    });
+    socket.connect();
+
+    // Handle incoming messages from the server
+    socket.on("message", (message) => {
+        const messageContainer = document.getElementById("message-container");
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        messageContainer.appendChild(messageElement);
+    });
+
+    // Handle form submission (sending messages)
+    const messageForm = document.getElementById("message-form");
+    const messageInput = document.getElementById("message-input");
+
+    messageForm.addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent the form from submitting via HTTP
+
+        const message = messageInput.value.trim();
+        if (message) {
+            socket.emit("chat", {msg: message});
+            messageInput.value = "";
+        }
+        //if (message) {
+        // socket.emit("react", { messageId: message, type: "love" });
+        //messageInput.value = "";
+        //}
+    });
+</script>
+</body>
+</html>

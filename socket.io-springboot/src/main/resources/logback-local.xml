@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="local">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%cyan(| %d{dd-MM-yyyy HH:mm:ss.SSS} |) %cyan([%X{traceId:-}]) - %cyan([%X{spanId:-}]) %highlight([%-5level]) %yellow([%logger{0}]) %magenta([%thread]) : %msg%n%throwable</pattern>
+            </encoder>
+        </appender>
+        <appender name="hibernate_STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+                <evaluator>
+                    <expression>
+                        return !formattedMessage.contains("Closing prepared statement");
+                    </expression>
+                </evaluator>
+                <onMatch>DENY</onMatch>
+            </filter>
+            <encoder>
+                <pattern>%cyan(| %d{dd-MM-yyyy HH:mm:ss.SSS} |) %cyan([%X{traceId:-}]) - %cyan([%X{spanId:-}]) %highlight([%-5level]) %yellow([%logger{0}]) %magenta([%thread]) : %msg%n%throwable</pattern>
+            </encoder>
+        </appender>
+        <logger name="org.hibernate.SQL" level="TRACE" additivity="false">
+            <appender-ref ref="hibernate_STDOUT"/>
+        </logger>
+        <logger name="org.hibernate.resource.jdbc.internal" level="TRACE" additivity="false">
+            <appender-ref ref="hibernate_STDOUT"/>
+        </logger>
+        <logger name="org.springframework.jdbc.core" level="TRACE" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="com.mfa.chat.core" level="TRACE" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
+
+        <root level="info" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+</configuration>
+
+

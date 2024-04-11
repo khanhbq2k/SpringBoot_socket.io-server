@@ -1,0 +1,11 @@
+logging:
+  config: src/main/resources/logback-local.xml
+spring:
+  task:
+    execution:
+      pool:
+        core-size: 1
+        max-size: 10
+        keep-alive: 120s
+      shutdown:
+        await-termination: true
