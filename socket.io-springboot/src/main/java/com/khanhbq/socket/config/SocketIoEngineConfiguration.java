@@ -1,34 +1,45 @@
 package com.khanhbq.socket.config;
 
+import com.khanhbq.distribution.identity.DistributedMachineIdGenerator;
+import com.khanhbq.socket.adapter.RedisAdapter;
 import io.socket.engineio.server.EngineIoServer;
 import io.socket.engineio.server.EngineIoServerOptions;
 import io.socket.socketio.server.SocketIoNamespace;
 import io.socket.socketio.server.SocketIoServer;
+import io.socket.socketio.server.SocketIoServerOptions;
+import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RedissonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+@Slf4j
 @Configuration
 public class SocketIoEngineConfiguration {
 
     @Bean
     public EngineIoServer engineIoServer() {
-        var opt = EngineIoServerOptions.newFromDefault();
+        EngineIoServerOptions opt = EngineIoServerOptions.newFromDefault();
         opt.setCorsHandlingDisabled(true);
-        var eioServer = new EngineIoServer(opt);
-        return eioServer;
+        return new EngineIoServer(opt);
     }
 
     @Bean
-    public SocketIoServer socketIoServer(EngineIoServer eioServer) {
-        var sioServer = new SocketIoServer(eioServer);
+    public SocketIoServer socketIoServer(EngineIoServer eioServer,
+                                         RedissonClient redissonClient,
+                                         DistributedMachineIdGenerator distributedMachineIdGenerator) {
+        SocketIoServerOptions options = SocketIoServerOptions.newFromDefault()
+                .setAdapterFactory(socketIoNamespace ->
+                        new RedisAdapter(socketIoNamespace, redissonClient, distributedMachineIdGenerator)
+                );
+        SocketIoServer sioServer = new SocketIoServer(eioServer, options);
+        log.info("Init Socket IO Server");
         return sioServer;
     }
 
     @Bean
     @Primary
     public SocketIoNamespace mainNamespace(SocketIoServer server) {
-        var namespace = server.namespace("/");
-        return namespace;
+        return server.namespace("/");
     }
 }

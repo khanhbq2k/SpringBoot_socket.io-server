@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.socket.socketio.server.SocketIoNamespace;
 import io.socket.socketio.server.SocketIoSocket;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class SocketController implements CommandLineRunner {
     @Override
     public void run(String... xargs) {
         mainNamespace.on("connection", args -> {
-            var socket = (SocketIoSocket) args[0];
+            SocketIoSocket socket = (SocketIoSocket) args[0];
             String subject = socket.getInitialQuery().get("subject");
             sessionManager.addSession(socket.getId(), subject);
             socket.on("disconnect", arr -> {
@@ -30,6 +31,8 @@ public class SocketController implements CommandLineRunner {
                 ChatMessage data;
                 try {
                     data = objectMapper.readValue(arr[0].toString(), ChatMessage.class);
+                    // broadcast all rooms
+                    socket.broadcast(null, "chat", new JSONObject(objectMapper.writeValueAsString(data)));
                 } catch (JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }

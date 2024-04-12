@@ -1,5 +1,6 @@
 logging:
   config: src/main/resources/logback-local.xml
+
 spring:
   task:
     execution:
@@ -9,3 +10,8 @@ spring:
         keep-alive: 120s
       shutdown:
         await-termination: true
+
+val:
+  redis:
+    host: localhost
+    port: 6379

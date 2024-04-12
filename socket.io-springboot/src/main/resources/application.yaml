@@ -5,3 +5,19 @@ logging:
   level:
     root: debug
 
+spring:
+  application:
+    name: socket.io-spring
+  profiles:
+    active: local
+  redis:
+    host: ${val.redis.host}
+    port: ${val.redis.port}
+    timeout: 10000
+  main:
+    allow-bean-definition-overriding: true
+
+distributed:
+  server:
+    group: socket
+    maximumCapacity: 1000

@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StringUtils;
 
 import java.net.InetAddress;
@@ -24,6 +25,7 @@ import java.util.TimeZone;
 })
 @ConfigurationPropertiesScan(basePackages = "com.khanhbq")
 @RequiredArgsConstructor
+@EnableScheduling
 public class Application implements CommandLineRunner {
 
     public static void main(String[] args) {

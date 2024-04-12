@@ -28,7 +28,7 @@
         <logger name="org.springframework.jdbc.core" level="TRACE" additivity="false">
             <appender-ref ref="STDOUT"/>
         </logger>
-        <logger name="com.mfa.chat.core" level="TRACE" additivity="false">
+        <logger name="com.khanhbq" level="TRACE" additivity="false">
             <appender-ref ref="STDOUT"/>
         </logger>
 
