@@ -1,7 +1,7 @@
-package com.khanhbq.distribution.identity.config;
+package com.khanhbq.socketio.spring.distribution.config;
 
-import com.khanhbq.distribution.identity.DistributedMachineIdGenerator;
-import com.khanhbq.distribution.identity.impl.RedisDistributedMachineIdGenerator;
+import com.khanhbq.socketio.spring.distribution.DistributedMachineIdGenerator;
+import com.khanhbq.socketio.spring.distribution.impl.RedisDistributedMachineIdGenerator;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

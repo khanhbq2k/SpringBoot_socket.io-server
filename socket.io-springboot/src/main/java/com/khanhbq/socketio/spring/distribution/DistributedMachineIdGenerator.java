@@ -1,4 +1,4 @@
-package com.khanhbq.distribution.identity;
+package com.khanhbq.socketio.spring.distribution;
 
 import java.util.Set;
 

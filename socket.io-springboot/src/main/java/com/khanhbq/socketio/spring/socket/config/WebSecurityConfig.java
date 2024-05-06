@@ -1,4 +1,4 @@
-package com.khanhbq.spring.config;
+package com.khanhbq.socketio.spring.socket.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

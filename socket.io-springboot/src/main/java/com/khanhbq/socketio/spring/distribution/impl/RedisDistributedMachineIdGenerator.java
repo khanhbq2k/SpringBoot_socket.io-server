@@ -1,6 +1,6 @@
-package com.khanhbq.distribution.identity.impl;
+package com.khanhbq.socketio.spring.distribution.impl;
 
-import com.khanhbq.distribution.identity.DistributedMachineIdGenerator;
+import com.khanhbq.socketio.spring.distribution.DistributedMachineIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RMapCache;

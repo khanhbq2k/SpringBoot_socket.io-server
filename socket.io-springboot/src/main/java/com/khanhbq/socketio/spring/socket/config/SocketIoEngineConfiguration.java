@@ -1,7 +1,7 @@
-package com.khanhbq.socket.config;
+package com.khanhbq.socketio.spring.socket.config;
 
-import com.khanhbq.distribution.identity.DistributedMachineIdGenerator;
-import com.khanhbq.socket.adapter.RedisAdapter;
+import com.khanhbq.socketio.spring.distribution.DistributedMachineIdGenerator;
+import com.khanhbq.socketio.spring.socket.adapter.RedisAdapter;
 import io.socket.engineio.server.EngineIoServer;
 import io.socket.engineio.server.EngineIoServerOptions;
 import io.socket.socketio.server.SocketIoNamespace;

@@ -1,4 +1,4 @@
-package com.khanhbq.spring;
+package com.khanhbq.socketio.spring;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +19,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = {"com.khanhbq"})
+@SpringBootApplication(scanBasePackages = {"com.khanhbq.socketio.spring"})
 @PropertySources({
         @PropertySource("classpath:application.yaml"),
 })
-@ConfigurationPropertiesScan(basePackages = "com.khanhbq")
+@ConfigurationPropertiesScan(basePackages = "com.khanhbq.socketio.spring")
 @RequiredArgsConstructor
 @EnableScheduling
 public class Application implements CommandLineRunner {

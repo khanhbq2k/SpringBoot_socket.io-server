@@ -1,4 +1,4 @@
-package com.khanhbq.socket;
+package com.khanhbq.socketio.spring.socket;
 
 import org.springframework.stereotype.Component;
 

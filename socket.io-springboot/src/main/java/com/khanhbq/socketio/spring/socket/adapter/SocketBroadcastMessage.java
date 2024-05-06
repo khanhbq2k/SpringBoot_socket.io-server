@@ -1,4 +1,4 @@
-package com.khanhbq.socket.adapter;
+package com.khanhbq.socketio.spring.socket.adapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

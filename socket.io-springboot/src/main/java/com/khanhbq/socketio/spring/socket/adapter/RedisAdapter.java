@@ -1,6 +1,6 @@
-package com.khanhbq.socket.adapter;
+package com.khanhbq.socketio.spring.socket.adapter;
 
-import com.khanhbq.distribution.identity.DistributedMachineIdGenerator;
+import com.khanhbq.socketio.spring.distribution.DistributedMachineIdGenerator;
 import io.socket.socketio.server.SocketIoAdapter;
 import io.socket.socketio.server.SocketIoMemoryAdapter;
 import io.socket.socketio.server.SocketIoNamespace;

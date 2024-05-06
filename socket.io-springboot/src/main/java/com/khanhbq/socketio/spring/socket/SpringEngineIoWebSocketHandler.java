@@ -1,4 +1,4 @@
-package com.khanhbq.socket;
+package com.khanhbq.socketio.spring.socket;
 
 import io.socket.engineio.server.EngineIoWebSocket;
 import org.springframework.web.socket.*;
